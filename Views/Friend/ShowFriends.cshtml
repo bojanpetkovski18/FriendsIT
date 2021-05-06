@@ -1,0 +1,63 @@
+﻿@model List<Friends.Models.FriendModel>
+
+@{
+    ViewBag.Title = "ShowFriends";
+}
+
+<h2>Your Friends</h2>
+
+
+@using (Html.BeginForm())
+{
+    <style>
+        table {
+            border: 1px solid black;
+            width: 380px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        
+        button {
+            width: 100px;
+            margin: 3px;
+            text-align: center;
+        }
+    </style>
+
+    <table>
+        <tr>
+            <th>Friend ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+
+        @{
+            foreach (var friend in Friends.Controllers.FriendController.Friends)
+            {
+                    <tr>
+                        <td>@friend.Id</td>
+                        <td>@friend.Ime</td>
+                        <td>@friend.MestoZiveenje</td>
+                        <td>
+                            <a href="EditFriend/@friend.Id">Edit</a>
+                            <br />
+                            <a href="DeleteFriend/@friend.Id">Delete</a>
+                        </td>
+                    </tr>
+               
+            }
+        }
+
+
+    </table>
+    <br />
+    <a href="NewFriend">Add a friend</a>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
